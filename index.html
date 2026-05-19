@@ -21,7 +21,7 @@
       --radius: 16px;
     }
 
-    html { scroll-behavior: smooth; font-size: 20px; }
+    html { scroll-behavior: smooth; font-size: 17px; }
 
     body {
       font-family: 'Noto Sans KR', sans-serif;
@@ -37,19 +37,19 @@
       backdrop-filter: blur(8px);
       border-bottom: 1px solid rgba(74,107,138,0.1);
       display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 5%;
+      padding: 10px 5%;
     }
-    .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
-    .nav-logo-icon { width: 110px; height: 110px; object-fit: contain; mix-blend-mode: multiply; }
-    .nav-logo-text { font-size: 1.3rem; font-weight: 700; color: var(--sea); line-height: 1.2; }
-    .nav-logo-text span { display: block; font-size: 0.85rem; font-weight: 400; color: var(--text-light); }
-    .nav-links { display: flex; gap: 32px; }
-    .nav-links a { text-decoration: none; font-size: 1.05rem; color: var(--text-light); font-weight: 500; transition: color .2s; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-icon { width: 68px; height: 68px; object-fit: contain; mix-blend-mode: multiply; }
+    .nav-logo-text { font-size: 1.05rem; font-weight: 700; color: var(--sea); line-height: 1.2; }
+    .nav-logo-text span { display: block; font-size: 0.7rem; font-weight: 400; color: var(--text-light); }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { text-decoration: none; font-size: 0.9rem; color: var(--text-light); font-weight: 500; transition: color .2s; }
     .nav-links a:hover { color: var(--sun); }
     .nav-cta {
       background: var(--sun); color: white; border: none;
-      padding: 8px 18px; border-radius: 20px;
-      font-size: 0.85rem; font-weight: 700; cursor: pointer;
+      padding: 7px 16px; border-radius: 18px;
+      font-size: 0.8rem; font-weight: 700; cursor: pointer;
       font-family: inherit; transition: background .2s;
     }
     .nav-cta:hover { background: #c96a43; }
@@ -606,8 +606,8 @@
     setTimeout(function () { document.getElementById('userName').focus(); }, 600);
   }
 
-  /* ── Send consultation via mailto ── */
-  function sendConsult(e) {
+  /* ── Send consultation via Web3Forms ── */
+  async function sendConsult(e) {
     e.preventDefault();
     var name    = document.getElementById('userName').value.trim();
     var contact = document.getElementById('userContact').value.trim();
@@ -616,21 +616,41 @@
 
     if (!name || !contact || !msg) { alert('필수 항목을 모두 입력해 주세요.'); return; }
 
-    var subject = encodeURIComponent('[온이음미래연구소 상담신청] ' + (topic || '일반 문의') + ' - ' + name);
-    var body = encodeURIComponent(
-      '[ 온이음미래연구소 상담 신청 ]\n\n' +
-      '■ 이름: ' + name + '\n' +
-      '■ 연락처: ' + contact + '\n' +
-      '■ 관심 주제: ' + (topic || '미선택') + '\n\n' +
-      '■ 상담 내용:\n' + msg + '\n\n' +
-      '---\n온이음미래연구소 홈페이지를 통해 신청하였습니다.'
-    );
+    var btn = document.querySelector('.form-submit');
+    btn.disabled = true;
+    btn.textContent = '전송 중...';
 
-    var mailto = 'mailto:oneumfuture@gmail.com?subject=' + subject + '&body=' + body;
-    window.location.href = mailto;
-
-    showToast();
-    document.getElementById('consultForm').reset();
+    try {
+      var res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: '5d0cd042-7217-400c-9594-2db4f7a6815c',
+          subject: '[온이음미래연구소 상담신청] ' + (topic || '일반 문의') + ' - ' + name,
+          from_name: name,
+          message:
+            '[ 온이음미래연구소 상담 신청 ]\n\n' +
+            '■ 이름: ' + name + '\n' +
+            '■ 연락처: ' + contact + '\n' +
+            '■ 관심 주제: ' + (topic || '미선택') + '\n\n' +
+            '■ 상담 내용:\n' + msg + '\n\n' +
+            '---\n온이음미래연구소 홈페이지를 통해 신청하였습니다.',
+          botcheck: false
+        })
+      });
+      var data = await res.json();
+      if (data.success) {
+        showToast('✅ 상담 신청이 완료됐습니다! 빠르게 연락드리겠습니다.');
+        document.getElementById('consultForm').reset();
+      } else {
+        throw new Error(data.message);
+      }
+    } catch(err) {
+      alert('전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '📩 상담 신청 보내기';
+    }
   }
 
   /* ── Reveal email ── */
@@ -640,8 +660,9 @@
   }
 
   /* ── Toast ── */
-  function showToast() {
+  function showToast(msg) {
     var t = document.getElementById('toast');
+    if (msg) t.textContent = msg;
     t.classList.add('show');
     setTimeout(function () { t.classList.remove('show'); }, 4000);
   }
