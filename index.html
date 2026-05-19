@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>온이음미래연구소 | 장애 자녀 미래설계 금융 컨설팅</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Pretendard", "Noto Sans KR", sans-serif;
+    }
+
+    body {
+      background: #f7f9fc;
+      color: #222;
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0d1b2a, #1b263b);
+      color: white;
+      padding: 100px 20px 80px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-btns {
+      margin-top: 35px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: #4ea8de;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #3c96cc;
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.4);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 2rem;
+      color: #0d1b2a;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #666;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      margin-bottom: 15px;
+      color: #1b263b;
+    }
+
+    .card p {
+      color: #555;
+      font-size: 0.98rem;
+    }
+
+    .contact-box {
+      background: white;
+      border-radius: 24px;
+      padding: 50px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid #dbe2ea;
+      font-size: 1rem;
+    }
+
+    textarea {
+      min-height: 160px;
+      resize: vertical;
+    }
+
+    button {
+      background: #1b263b;
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background: #0d1b2a;
+    }
+
+    .email-toggle {
+      text-align: center;
+      margin-top: 35px;
+    }
+
+    .email-toggle button {
+      width: auto;
+      padding: 12px 24px;
+      background: #4ea8de;
+    }
+
+    #emailText {
+      margin-top: 15px;
+      display: none;
+      font-weight: 600;
+      color: #1b263b;
+    }
+
+    .qr-section {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .qr-section img {
+      width: 180px;
+      height: 180px;
+      border-radius: 16px;
+      background: #fff;
+      padding: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    footer {
+      background: #0d1b2a;
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 80px;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+
+      .contact-box {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>온이음미래연구소</h1>
+    <p>
+      장애 자녀와 가족의 미래를 위한 금융·신탁·보험·현금흐름 설계를 연구하고,
+      현실적인 미래 대비 솔루션을 제공합니다.
+    </p>
+
+    <div class="hero-btns">
+      <a href="#consulting" class="btn btn-primary">상담 신청하기</a>
+      <a href="#services" class="btn btn-secondary">서비스 보기</a>
+    </div>
+  </header>
+
+  <section id="services">
+    <div class="section-title">
+      <h2>핵심 서비스</h2>
+      <p>장애 자녀 가정을 위한 전문 미래설계 컨설팅</p>
+    </div>
+
+    <div class="services">
+      <div class="card">
+        <h3>미래 현금흐름 설계</h3>
+        <p>
+          부모 사후 이후까지 고려한 평생 현금흐름 구조를 설계합니다.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>보험·연금 설계</h3>
+        <p>
+          장애인 연금, 사망보험금, 비과세 연금 구조를 통합적으로 검토합니다.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>신탁 컨설팅</h3>
+        <p>
+          유언대용신탁 및 장애 자녀 보호를 위한 신탁 구조를 안내합니다.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>복지 제도 연계</h3>
+        <p>
+          기초생활보장, 장애인연금, 활동지원 등 복지와 자산 구조를 함께 검토합니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="consulting">
+    <div class="section-title">
+      <h2>상담 신청</h2>
+      <p>아래 내용을 작성하면 상담 내용이 이메일로 연결됩니다.</p>
+    </div>
+
+    <div class="contact-box">
+
+      <!-- FormSubmit 사용 -->
+      <form action="https://formsubmit.co/oneumfuture@gmail.com" method="POST">
+
+        <!-- 숨김 설정 -->
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="온이음미래연구소 상담 신청">
+        <input type="hidden" name="_template" value="table">
+
+        <input type="text" name="상담자 이름" placeholder="상담자 이름" required />
+
+        <input type="tel" name="연락처" placeholder="연락처" required />
+
+        <textarea
+          name="상담 내용"
+          placeholder="상담을 원하는 내용을 자유롭게 작성해주세요."
+          required
+        ></textarea>
+
+        <button type="submit">상담 신청 보내기</button>
+      </form>
+
+      <div class="email-toggle">
+        <button onclick="toggleEmail()">이메일 확인하기</button>
+        <div id="emailText">oneumfuture@gmail.com</div>
+      </div>
+
+      <div class="qr-section">
+        <h3 style="margin-bottom:20px;">QR 상담 연결</h3>
+
+        <!-- QR 코드 -->
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://yourwebsite.com"
+          alt="QR Code"
+        />
+
+        <p style="margin-top:15px; color:#666;">
+          모바일에서 QR코드를 스캔해 상담 신청 페이지로 이동하세요.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    © 2026 온이음미래연구소 | Oneum Future Institute
+  </footer>
+
+  <script>
+    function toggleEmail() {
+      const email = document.getElementById("emailText");
+
+      if (email.style.display === "block") {
+        email.style.display = "none";
+      } else {
+        email.style.display = "block";
+      }
+    }
+  </script>
+
+</body>
+</html>
