@@ -1,340 +1,665 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>온이음미래연구소 | 장애 자녀 미래설계 금융 컨설팅</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>온이음미래연구소 | 우리아이 미래설계 로드맵</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Pretendard", "Noto Sans KR", sans-serif;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sun: #E07B54;
+      --sea: #4A6B8A;
+      --cream: #FAF6F0;
+      --cream-dark: #F0E6D3;
+      --text: #2E3A45;
+      --text-light: #6B7E8A;
+      --white: #FFFFFF;
+      --radius: 16px;
     }
+
+    html { scroll-behavior: smooth; font-size: 20px; }
 
     body {
-      background: #f7f9fc;
-      color: #222;
-      line-height: 1.7;
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.8;
     }
 
-    header {
-      background: linear-gradient(135deg, #0d1b2a, #1b263b);
-      color: white;
-      padding: 100px 20px 80px;
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250, 246, 240, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(74,107,138,0.1);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 5%;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .nav-logo-icon { width: 110px; height: 110px; object-fit: contain; mix-blend-mode: multiply; }
+    .nav-logo-text { font-size: 1.3rem; font-weight: 700; color: var(--sea); line-height: 1.2; }
+    .nav-logo-text span { display: block; font-size: 0.85rem; font-weight: 400; color: var(--text-light); }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { text-decoration: none; font-size: 1.05rem; color: var(--text-light); font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--sun); }
+    .nav-cta {
+      background: var(--sun); color: white; border: none;
+      padding: 8px 18px; border-radius: 20px;
+      font-size: 0.85rem; font-weight: 700; cursor: pointer;
+      font-family: inherit; transition: background .2s;
+    }
+    .nav-cta:hover { background: #c96a43; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
       text-align: center;
+      padding: 100px 5% 60px;
+      background: radial-gradient(ellipse at 50% 0%, #f5e4d0 0%, var(--cream) 65%);
     }
-
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      letter-spacing: -1px;
+    .hero-logo { margin-bottom: 40px; }
+    .hero-logo img { width: 340px; height: auto; }
+    .hero-subtitle {
+      font-size: 0.95rem; font-weight: 500; color: var(--sun);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 16px;
     }
-
-    header p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-      max-width: 800px;
-      margin: 0 auto;
+    .hero-title {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900; color: var(--sea);
+      line-height: 1.3; margin-bottom: 20px;
     }
-
-    .hero-btns {
-      margin-top: 35px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
+    .hero-title em { color: var(--sun); font-style: normal; }
+    .hero-desc {
+      max-width: 560px; font-size: 1.05rem; color: var(--text-light);
+      font-weight: 400; margin-bottom: 40px;
     }
-
-    .btn {
-      padding: 14px 28px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-
+    .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
     .btn-primary {
-      background: #4ea8de;
-      color: white;
+      background: var(--sun); color: white;
+      padding: 14px 32px; border-radius: 28px;
+      font-size: 1rem; font-weight: 700; text-decoration: none;
+      transition: all .2s; display: inline-block;
+      box-shadow: 0 4px 18px rgba(224,123,84,0.35);
     }
-
-    .btn-primary:hover {
-      background: #3c96cc;
+    .btn-primary:hover { background: #c96a43; transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent; color: var(--sea);
+      padding: 14px 32px; border-radius: 28px;
+      font-size: 1rem; font-weight: 700; text-decoration: none;
+      border: 2px solid var(--sea); transition: all .2s; display: inline-block;
     }
-
-    .btn-secondary {
-      border: 1px solid rgba(255,255,255,0.4);
-      color: white;
+    .btn-outline:hover { background: var(--sea); color: white; }
+    .hero-scroll {
+      margin-top: 60px; display: flex; flex-direction: column;
+      align-items: center; gap: 8px; color: var(--text-light); font-size: 0.8rem;
     }
-
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.1);
+    .scroll-dot {
+      width: 6px; height: 32px; border-radius: 3px;
+      background: linear-gradient(to bottom, var(--sun), transparent);
+      animation: scrollAnim 1.8s ease-in-out infinite;
     }
+    @keyframes scrollAnim { 0%,100%{opacity:.3;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.1)} }
 
-    section {
-      padding: 80px 20px;
-      max-width: 1200px;
-      margin: auto;
+    /* ─── SECTION COMMON ─── */
+    section { padding: 80px 5%; }
+    .section-label {
+      font-size: 0.8rem; font-weight: 700; color: var(--sun);
+      letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px;
     }
-
     .section-title {
-      text-align: center;
-      margin-bottom: 50px;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 900; color: var(--sea); line-height: 1.3; margin-bottom: 16px;
+    }
+    .section-desc {
+      font-size: 1rem; color: var(--text-light); max-width: 560px; margin-bottom: 48px;
     }
 
-    .section-title h2 {
-      font-size: 2rem;
-      color: #0d1b2a;
-      margin-bottom: 10px;
+    /* ─── INTRO BAND ─── */
+    .intro-band {
+      background: var(--sea); color: white;
+      padding: 48px 5%; text-align: center;
     }
-
-    .section-title p {
-      color: #666;
+    .intro-band p {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      font-weight: 300; line-height: 1.9; max-width: 700px; margin: 0 auto;
     }
+    .intro-band strong { font-weight: 700; color: #f5c199; }
 
-    .services {
+    /* ─── SERVICES ─── */
+    #services { background: var(--cream); }
+    .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 25px;
-    }
-
-    .card {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .card h3 {
-      margin-bottom: 15px;
-      color: #1b263b;
-    }
-
-    .card p {
-      color: #555;
-      font-size: 0.98rem;
-    }
-
-    .contact-box {
-      background: white;
-      border-radius: 24px;
-      padding: 50px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 20px;
     }
-
-    input, textarea {
-      width: 100%;
-      padding: 16px;
-      border-radius: 12px;
-      border: 1px solid #dbe2ea;
-      font-size: 1rem;
+    .service-card {
+      background: white; border-radius: var(--radius);
+      padding: 28px 24px; cursor: pointer;
+      border: 1px solid rgba(74,107,138,0.1);
+      transition: all .25s;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: var(--sun); opacity: 0;
+      transition: opacity .25s;
+    }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(74,107,138,0.15); }
+    .service-card:hover::before { opacity: 1; }
+    .service-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: var(--cream-dark); display: flex;
+      align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 16px;
+      transition: background .25s;
+    }
+    .service-card:hover .service-icon { background: #fde8d8; }
+    .service-num {
+      font-size: 0.7rem; font-weight: 700; color: var(--sun);
+      letter-spacing: 0.1em; margin-bottom: 6px;
+    }
+    .service-name { font-size: 1.15rem; font-weight: 700; color: var(--sea); margin-bottom: 8px; }
+    .service-desc { font-size: 0.88rem; color: var(--text-light); line-height: 1.7; }
+    .service-tag {
+      display: inline-block; margin-top: 14px;
+      font-size: 0.75rem; color: var(--sun); font-weight: 700;
+      padding: 4px 10px; border-radius: 10px;
+      background: rgba(224,123,84,0.1);
     }
 
-    textarea {
-      min-height: 160px;
-      resize: vertical;
+    /* ─── JOURNEY ─── */
+    #journey { background: var(--cream-dark); }
+    .journey-wrap { display: flex; flex-direction: column; gap: 0; max-width: 680px; }
+    .journey-item { display: flex; gap: 20px; align-items: flex-start; }
+    .journey-spine {
+      display: flex; flex-direction: column; align-items: center;
+      flex-shrink: 0; width: 40px;
     }
-
-    button {
-      background: #1b263b;
-      color: white;
-      border: none;
-      padding: 16px;
-      border-radius: 12px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.3s;
-      font-weight: 600;
+    .journey-dot {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: white; border: 3px solid var(--sun);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 900; color: var(--sun);
+      flex-shrink: 0; z-index: 1;
     }
+    .journey-line { width: 2px; flex: 1; min-height: 40px; background: rgba(224,123,84,0.25); }
+    .journey-content { padding: 6px 0 40px; }
+    .journey-content h4 { font-size: 1rem; font-weight: 700; color: var(--sea); margin-bottom: 4px; }
+    .journey-content p { font-size: 0.875rem; color: var(--text-light); }
 
-    button:hover {
-      background: #0d1b2a;
+    /* ─── ABOUT ─── */
+    #about {
+      background: white;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
     }
-
-    .email-toggle {
-      text-align: center;
-      margin-top: 35px;
+    .about-img-wrap {
+      background: var(--cream); border-radius: var(--radius);
+      padding: 48px; display: flex; align-items: center; justify-content: center;
     }
-
-    .email-toggle button {
-      width: auto;
-      padding: 12px 24px;
-      background: #4ea8de;
+    .about-img-wrap svg { width: 100%; max-width: 280px; }
+    .about-quotes {
+      margin-top: 32px; display: flex; flex-direction: column; gap: 16px;
     }
-
-    #emailText {
-      margin-top: 15px;
-      display: none;
-      font-weight: 600;
-      color: #1b263b;
+    .quote-item {
+      padding: 16px 20px; border-left: 3px solid var(--sun);
+      background: var(--cream); border-radius: 0 12px 12px 0;
+      font-size: 0.9rem; color: var(--text); font-weight: 500; line-height: 1.7;
     }
+    .quote-item span { display: block; font-size: 0.78rem; color: var(--text-light); margin-top: 4px; }
 
-    .qr-section {
-      text-align: center;
-      margin-top: 50px;
+    /* ─── CONSULT ─── */
+    #consult {
+      background: var(--sea);
+      display: flex; flex-direction: column; align-items: center; text-align: center;
     }
-
-    .qr-section img {
-      width: 180px;
-      height: 180px;
-      border-radius: 16px;
-      background: #fff;
-      padding: 10px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    #consult .section-title { color: white; }
+    #consult .section-desc { color: rgba(255,255,255,0.7); margin-left: auto; margin-right: auto; }
+    .consult-wrap {
+      display: grid; grid-template-columns: 1fr auto; gap: 48px;
+      width: 100%; max-width: 880px; align-items: start; text-align: left;
     }
+    .consult-form {
+      background: white; border-radius: var(--radius); padding: 36px;
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-size: 0.85rem; font-weight: 700;
+      color: var(--sea); margin-bottom: 6px;
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: 12px 16px;
+      border: 1.5px solid #e0e8ed; border-radius: 10px;
+      font-family: inherit; font-size: 0.92rem; color: var(--text);
+      background: var(--cream); outline: none;
+      transition: border-color .2s;
+    }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--sun); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit {
+      width: 100%; padding: 14px;
+      background: var(--sun); color: white; border: none;
+      border-radius: 10px; font-family: inherit;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+      transition: background .2s;
+    }
+    .form-submit:hover { background: #c96a43; }
+    .email-reveal-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 14px; font-size: 0.82rem; color: rgba(255,255,255,0.6);
+      background: none; border: none; cursor: pointer; font-family: inherit;
+      text-decoration: underline;
+    }
+    .email-reveal-btn:hover { color: white; }
+    #email-revealed {
+      display: none; margin-top: 6px;
+      font-size: 0.9rem; color: #f5c199; font-weight: 700;
+    }
+    .qr-box {
+      background: rgba(255,255,255,0.1); border-radius: var(--radius);
+      padding: 28px 24px; text-align: center; flex-shrink: 0;
+    }
+    .qr-box p {
+      font-size: 0.82rem; color: rgba(255,255,255,0.7);
+      margin-top: 14px; line-height: 1.6;
+    }
+    .qr-box strong { color: white; display: block; font-size: 0.95rem; margin-bottom: 12px; }
+    #qrcode canvas, #qrcode img { border-radius: 10px; background: white; padding: 8px; }
 
+    /* ─── SUCCESS TOAST ─── */
+    .toast {
+      position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: var(--sea); color: white; padding: 14px 28px;
+      border-radius: 28px; font-size: 0.92rem; font-weight: 500;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      transition: transform .4s ease; z-index: 999; white-space: nowrap;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ─── FOOTER ─── */
     footer {
-      background: #0d1b2a;
-      color: rgba(255,255,255,0.8);
-      text-align: center;
-      padding: 30px 20px;
-      margin-top: 80px;
-      font-size: 0.95rem;
+      background: #1e2d38; color: rgba(255,255,255,0.5);
+      padding: 36px 5%; text-align: center; font-size: 0.82rem; line-height: 2;
     }
+    footer strong { color: rgba(255,255,255,0.85); }
 
+    /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
-      header h1 {
-        font-size: 2.2rem;
-      }
-
-      .contact-box {
-        padding: 30px 20px;
-      }
+      .nav-links { display: none; }
+      #about { grid-template-columns: 1fr; }
+      .about-img-wrap { padding: 32px; }
+      .consult-wrap { grid-template-columns: 1fr; }
+      .qr-box { display: none; }
+    }
+    @media (max-width: 480px) {
+      section { padding: 60px 5%; }
+      .services-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
-
 <body>
 
-  <header>
-    <h1>온이음미래연구소</h1>
-    <p>
-      장애 자녀와 가족의 미래를 위한 금융·신탁·보험·현금흐름 설계를 연구하고,
-      현실적인 미래 대비 솔루션을 제공합니다.
+<!-- ════════════════════════════════════ NAV ════════════════════════════════════ -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="logo.jpg" alt="온이음미래연구소 로고" class="nav-logo-icon">
+    <div class="nav-logo-text">온이음미래연구소<span>우리아이 미래설계 로드맵</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="#services">서비스</a>
+    <a href="#journey">여정</a>
+    <a href="#about">소개</a>
+    <a href="#consult">상담신청</a>
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('consult').scrollIntoView({behavior:'smooth'})">무료 상담</button>
+</nav>
+
+<!-- ════════════════════════════════════ HERO ════════════════════════════════════ -->
+<section class="hero" id="top">
+  <div class="hero-logo">
+    <img src="logo.jpg" alt="온이음미래연구소 로고">
+  </div>
+  <p class="hero-subtitle">온이음 미래연구소</p>
+  <h1 class="hero-title">
+    <em>우리 아이의 내일</em>을<br>함께 설계합니다
+  </h1>
+  <p class="hero-desc">
+    엄마의 언어와 경험으로 쉽게 풀어쓴<br>
+    <strong>장애 아이 미래 설계 실행 가이드</strong><br>
+    복지·연금·신탁·후견·주거·돌봄 — 막막했던 여정을 로드맵으로 만들어 드립니다.
+  </p>
+  <div class="hero-buttons">
+    <a href="#consult" class="btn-primary">지금 상담 신청하기</a>
+    <a href="#services" class="btn-outline">어떤 내용인지 보기</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-dot"></div>
+    <span>스크롤</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════ INTRO BAND ════════════════════════════════════ -->
+<div class="intro-band">
+  <p>
+    "아이의 미래가 걱정되는데 어디서부터 시작해야 할지 모르겠다"<br>
+    <strong>그 막막함, 저도 알아요.</strong><br>
+    온이음미래연구소는 장애 아이를 키우는 엄마의 시선으로, 복잡한 제도를 <strong>실행 가능한 로드맵</strong>으로 만들어 드립니다.
+  </p>
+</div>
+
+<!-- ════════════════════════════════════ SERVICES ════════════════════════════════════ -->
+<section id="services">
+  <p class="section-label">미래설계 8가지 핵심 주제</p>
+  <h2 class="section-title">함께 그려나갈<br>여정의 목차</h2>
+  <p class="section-desc">각 주제를 클릭하면 상담 신청 화면으로 이동합니다. 궁금한 항목을 선택해 문의해 주세요.</p>
+
+  <div class="services-grid">
+
+    <div class="service-card" onclick="openConsult('복지혜택')">
+      <div class="service-icon">🏛️</div>
+      <div class="service-num">01</div>
+      <div class="service-name">복지 혜택</div>
+      <p class="service-desc">장애등급·연령별로 받을 수 있는 국가 지원금, 활동 지원, 교육비 등 놓치기 쉬운 복지 혜택을 빠짐없이 정리합니다.</p>
+      <span class="service-tag">▶ 상담 신청</span>
+    </div>
+
+    <div class="service-card" onclick="openConsult('유족연금')">
+      <div class="service-icon">🌿</div>
+      <div class="service-num">02</div>
+      <div class="service-name">유족 연금</div>
+      <p class="service-desc">부모가 먼저 세상을 떠나도 아이에게 이어지는 연금 구조를 이해하고, 가장 유리한 수령 전략을 함께 설계합니다.</p>
+      <span class="service-tag">▶ 상담 신청</span>
+    </div>
+
+    <div class="service-card" onclick="openConsult('장애인전용연금보험')">
+      <div class="service-icon">🔒</div>
+      <div class="service-num">03</div>
+      <div class="service-name">장애인 전용 연금보험</div>
+      <p class="service-desc">일반 보험과 다른 세제 혜택과 구조를 이해하고, 아이의 평생 현금흐름을 지탱할 금융 안전망을 만들어 드립니다.</p>
+      <span class="service-tag">▶ 상담 신청</span>
+    </div>
+
+    <div class="service-card" onclick="openConsult('신탁')">
+      <div class="service-icon">📜</div>
+      <div class="service-num">04</div>
+      <div class="service-name">신탁</div>
+      <p class="service-desc">내가 없어도 재산이 아이를 위해 올바르게 쓰이도록. 장애인 특정 신탁·유언 대용 신탁을 쉽게 이해하고 설정하는 방법을 안내합니다.</p>
+      <span class="service-tag">▶ 상담 신청</span>
+    </div>
+
+    <div class="service-card" onclick="openConsult('후견')">
+      <div class="service-icon">🤝</div>
+      <div class="service-num">05</div>
+      <div class="service-name">후견</div>
+      <p class="service-desc">성년이 된 아이의 법적 의사결정을 누가, 어떻게 도울지. 법정 후견과 임의 후견의 차이, 준비 시기와 절차를 설명합니다.</p>
+      <span class="service-tag">▶ 상담 신청</span>
+    </div>
+
+    <div class="service-card" onclick="openConsult('주거모델')">
+      <div class="service-icon">🏡</div>
+      <div class="service-num">06</div>
+      <div class="service-name">주거 모델</div>
+      <p class="service-desc">독립과 돌봄이 공존하는 삶을 위해 — 공동생활 가정, 지원 주택, 자가 마련 전략 등 아이에게 맞는 주거 모델을 탐색합니다.</p>
+      <span class="service-tag">▶ 상담 신청</span>
+    </div>
+
+    <div class="service-card" onclick="openConsult('미래현금흐름도설계')">
+      <div class="service-icon">📊</div>
+      <div class="service-num">07</div>
+      <div class="service-name">미래 현금흐름도 설계</div>
+      <p class="service-desc">복지 급여 + 연금 + 보험 + 자산 수익을 하나의 표로 그려드립니다. 아이의 나이별 수입·지출을 한눈에 볼 수 있는 현금흐름 지도를 만듭니다.</p>
+      <span class="service-tag">▶ 상담 신청</span>
+    </div>
+
+    <div class="service-card" onclick="openConsult('돌봄매뉴얼')">
+      <div class="service-icon">📋</div>
+      <div class="service-num">08</div>
+      <div class="service-name">돌봄 매뉴얼</div>
+      <p class="service-desc">나 없이도 누구나 아이를 돌볼 수 있도록. 아이의 하루 루틴, 건강 정보, 응급 대응, 연락망까지 담긴 나만의 돌봄 매뉴얼을 함께 만듭니다.</p>
+      <span class="service-tag">▶ 상담 신청</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════ JOURNEY ════════════════════════════════════ -->
+<section id="journey">
+  <p class="section-label">함께하는 과정</p>
+  <h2 class="section-title">한 걸음씩, 같이<br>걸어가는 여정</h2>
+  <p class="section-desc">복잡하고 막막한 미래 설계를 8가지 주제로 나눠 차근차근 풀어갑니다.</p>
+
+  <div class="journey-wrap">
+    <div class="journey-item">
+      <div class="journey-spine"><div class="journey-dot">1</div><div class="journey-line"></div></div>
+      <div class="journey-content"><h4>현재 상황 파악 — 복지 혜택 점검</h4><p>지금 받고 있는 혜택, 놓치고 있는 혜택을 함께 확인합니다.</p></div>
+    </div>
+    <div class="journey-item">
+      <div class="journey-spine"><div class="journey-dot">2</div><div class="journey-line"></div></div>
+      <div class="journey-content"><h4>부모의 은퇴 이후 — 유족연금 전략</h4><p>국민연금, 공무원연금의 유족연금 수령 구조를 명확히 합니다.</p></div>
+    </div>
+    <div class="journey-item">
+      <div class="journey-spine"><div class="journey-dot">3</div><div class="journey-line"></div></div>
+      <div class="journey-content"><h4>금융 안전망 구축 — 장애인 연금보험</h4><p>세금 혜택을 최대한 활용한 평생 소득 기반을 만듭니다.</p></div>
+    </div>
+    <div class="journey-item">
+      <div class="journey-spine"><div class="journey-dot">4</div><div class="journey-line"></div></div>
+      <div class="journey-content"><h4>자산 보호 — 신탁 설계</h4><p>재산이 아이를 위해 올바르게 쓰이도록 법적 구조를 만듭니다.</p></div>
+    </div>
+    <div class="journey-item">
+      <div class="journey-spine"><div class="journey-dot">5</div><div class="journey-line"></div></div>
+      <div class="journey-content"><h4>법적 보호 — 후견인 지정</h4><p>성년 이후 아이의 권리를 지킬 법적 대리인을 준비합니다.</p></div>
+    </div>
+    <div class="journey-item">
+      <div class="journey-spine"><div class="journey-dot">6</div><div class="journey-line"></div></div>
+      <div class="journey-content"><h4>삶의 공간 — 주거 모델 결정</h4><p>아이의 특성과 가족 상황에 맞는 주거 형태를 탐색합니다.</p></div>
+    </div>
+    <div class="journey-item">
+      <div class="journey-spine"><div class="journey-dot">7</div><div class="journey-line"></div></div>
+      <div class="journey-content"><h4>전체 조망 — 미래 현금흐름 지도</h4><p>모든 수입과 지출을 연령대별로 한 장에 정리합니다.</p></div>
+    </div>
+    <div class="journey-item">
+      <div class="journey-spine"><div class="journey-dot">8</div><div class="journey-line"></div></div>
+      <div class="journey-content" style="padding-bottom:0"><h4>완성 — 나만의 돌봄 매뉴얼</h4><p>누가 봐도 아이를 돌볼 수 있는 완성된 매뉴얼로 마무리합니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════ ABOUT ════════════════════════════════════ -->
+<section id="about">
+  <div class="about-img-wrap">
+    <svg viewBox="0 0 280 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Mom and child illustration (simple line art) -->
+      <!-- Mom -->
+      <circle cx="100" cy="70" r="22" fill="#F5E0D0" stroke="#E07B54" stroke-width="2"/>
+      <path d="M62 160 Q62 120 100 115 Q138 120 138 160" fill="#F5E0D0" stroke="#E07B54" stroke-width="2"/>
+      <!-- Child -->
+      <circle cx="170" cy="85" r="16" fill="#D9EAF5" stroke="#4A6B8A" stroke-width="2"/>
+      <path d="M140 160 Q140 128 170 124 Q200 128 200 160" fill="#D9EAF5" stroke="#4A6B8A" stroke-width="2"/>
+      <!-- Holding hands -->
+      <line x1="138" y1="140" x2="146" y2="140" stroke="#E07B54" stroke-width="3" stroke-linecap="round"/>
+      <!-- Sun -->
+      <circle cx="220" cy="40" r="18" fill="#E07B54" opacity="0.6"/>
+      <line x1="220" y1="14" x2="220" y2="8" stroke="#E07B54" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+      <line x1="238" y1="22" x2="244" y2="16" stroke="#E07B54" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+      <!-- Road -->
+      <path d="M40 175 Q140 165 240 175" stroke="#4A6B8A" stroke-width="2.5" stroke-dasharray="8 5" stroke-linecap="round" fill="none" opacity="0.4"/>
+      <path d="M30 190 Q140 178 260 190" stroke="#4A6B8A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.25"/>
+      <!-- Stars/dots -->
+      <circle cx="48" cy="50" r="3" fill="#E07B54" opacity="0.4"/>
+      <circle cx="240" cy="130" r="4" fill="#4A6B8A" opacity="0.3"/>
+      <circle cx="30" cy="130" r="2.5" fill="#E07B54" opacity="0.3"/>
+    </svg>
+  </div>
+
+  <div>
+    <p class="section-label">온이음미래연구소 소개</p>
+    <h2 class="section-title">엄마의 언어로<br>쓴 실행 가이드</h2>
+    <p style="font-size:0.97rem;color:var(--text-light);line-height:1.9;margin-bottom:24px;">
+      온이음미래연구소는 장애 아이를 키우는 부모의 가장 깊은 걱정 — <strong style="color:var(--text)">"내가 없어도 아이가 잘 살 수 있을까"</strong> — 를 현실적인 계획으로 바꾸는 곳입니다.
+      <br><br>
+      법률·금융·복지 전문가의 언어가 아닌, <strong style="color:var(--text)">직접 경험하고 부딪힌 엄마의 언어</strong>로 복잡한 제도를 풀어드립니다. 이론이 아닌 실행 가능한 로드맵, 숫자가 보이는 현금흐름 설계를 함께 만들어 드립니다.
     </p>
-
-    <div class="hero-btns">
-      <a href="#consulting" class="btn btn-primary">상담 신청하기</a>
-      <a href="#services" class="btn btn-secondary">서비스 보기</a>
-    </div>
-  </header>
-
-  <section id="services">
-    <div class="section-title">
-      <h2>핵심 서비스</h2>
-      <p>장애 자녀 가정을 위한 전문 미래설계 컨설팅</p>
-    </div>
-
-    <div class="services">
-      <div class="card">
-        <h3>미래 현금흐름 설계</h3>
-        <p>
-          부모 사후 이후까지 고려한 평생 현금흐름 구조를 설계합니다.
-        </p>
+    <div class="about-quotes">
+      <div class="quote-item">
+        "어디서부터 시작해야 할지 막막했는데, 처음으로 전체 그림이 보였어요."
+        <span>— 발달장애 자녀를 둔 40대 어머니</span>
       </div>
-
-      <div class="card">
-        <h3>보험·연금 설계</h3>
-        <p>
-          장애인 연금, 사망보험금, 비과세 연금 구조를 통합적으로 검토합니다.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>신탁 컨설팅</h3>
-        <p>
-          유언대용신탁 및 장애 자녀 보호를 위한 신탁 구조를 안내합니다.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>복지 제도 연계</h3>
-        <p>
-          기초생활보장, 장애인연금, 활동지원 등 복지와 자산 구조를 함께 검토합니다.
-        </p>
+      <div class="quote-item">
+        "복지 혜택을 이렇게 많이 놓치고 있었다는 걸 몰랐어요."
+        <span>— 지체장애 자녀를 둔 50대 어머니</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="consulting">
-    <div class="section-title">
-      <h2>상담 신청</h2>
-      <p>아래 내용을 작성하면 상담 내용이 이메일로 연결됩니다.</p>
-    </div>
+<!-- ════════════════════════════════════ CONSULT ════════════════════════════════════ -->
+<section id="consult">
+  <p class="section-label" style="color:#f5c199">상담 신청</p>
+  <h2 class="section-title">첫 걸음, 함께<br>시작해요</h2>
+  <p class="section-desc">
+    궁금한 주제, 현재 상황을 간단히 적어 보내주세요.<br>따뜻하고 구체적인 답변으로 찾아뵙겠습니다.
+  </p>
 
-    <div class="contact-box">
-
-      <!-- FormSubmit 사용 -->
-      <form action="https://formsubmit.co/oneumfuture@gmail.com" method="POST">
-
-        <!-- 숨김 설정 -->
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_subject" value="온이음미래연구소 상담 신청">
-        <input type="hidden" name="_template" value="table">
-
-        <input type="text" name="상담자 이름" placeholder="상담자 이름" required />
-
-        <input type="tel" name="연락처" placeholder="연락처" required />
-
-        <textarea
-          name="상담 내용"
-          placeholder="상담을 원하는 내용을 자유롭게 작성해주세요."
-          required
-        ></textarea>
-
-        <button type="submit">상담 신청 보내기</button>
+  <div class="consult-wrap">
+    <div class="consult-form">
+      <form id="consultForm" onsubmit="sendConsult(event)">
+        <div class="form-group">
+          <label for="userName">이름 *</label>
+          <input type="text" id="userName" placeholder="성함을 입력해 주세요" required>
+        </div>
+        <div class="form-group">
+          <label for="userContact">연락처 *</label>
+          <input type="text" id="userContact" placeholder="전화번호 또는 이메일" required>
+        </div>
+        <div class="form-group">
+          <label for="consultTopic">관심 주제</label>
+          <select id="consultTopic">
+            <option value="">-- 주제를 선택해 주세요 (선택사항) --</option>
+            <option>복지혜택</option>
+            <option>유족연금</option>
+            <option>장애인전용연금보험</option>
+            <option>신탁</option>
+            <option>후견</option>
+            <option>주거모델</option>
+            <option>미래현금흐름도설계</option>
+            <option>돌봄매뉴얼</option>
+            <option>전체 로드맵 상담</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="userMessage">상담 내용 *</label>
+          <textarea id="userMessage" placeholder="아이의 나이, 장애 유형, 현재 고민이나 질문을 편하게 적어 주세요." required></textarea>
+        </div>
+        <button type="submit" class="form-submit">📩 상담 신청 보내기</button>
       </form>
-
-      <div class="email-toggle">
-        <button onclick="toggleEmail()">이메일 확인하기</button>
-        <div id="emailText">oneumfuture@gmail.com</div>
+      <div style="margin-top:18px;padding-top:16px;border-top:1px solid #eee;">
+        <button class="email-reveal-btn" onclick="toggleEmail()">
+          🔒 직접 이메일로 문의하시려면 클릭하세요
+        </button>
+        <div id="email-revealed">📧 oneumfuture@gmail.com</div>
       </div>
-
-      <div class="qr-section">
-        <h3 style="margin-bottom:20px;">QR 상담 연결</h3>
-
-        <!-- QR 코드 -->
-        <img
-          src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://yourwebsite.com"
-          alt="QR Code"
-        />
-
-        <p style="margin-top:15px; color:#666;">
-          모바일에서 QR코드를 스캔해 상담 신청 페이지로 이동하세요.
-        </p>
-      </div>
-
     </div>
-  </section>
 
-  <footer>
-    © 2026 온이음미래연구소 | Oneum Future Institute
-  </footer>
+    <div class="qr-box">
+      <strong>모바일로 상담 신청</strong>
+      <div id="qrcode"></div>
+      <p>QR 코드를 스캔하면<br>상담 신청 화면으로<br>바로 이동합니다</p>
+    </div>
+  </div>
+</section>
 
-  <script>
-    function toggleEmail() {
-      const email = document.getElementById("emailText");
+<!-- ════════════════════════════════════ FOOTER ════════════════════════════════════ -->
+<footer>
+  <strong>온이음미래연구소</strong><br>
+  우리아이 미래설계 로드맵 | 장애 아이 미래 설계 실행 컨설팅<br>
+  문의: 상담 신청 폼을 이용해 주세요<br>
+  <span style="font-size:0.75rem;opacity:0.5">© 2025 온이음미래연구소. All rights reserved.</span>
+</footer>
 
-      if (email.style.display === "block") {
-        email.style.display = "none";
-      } else {
-        email.style.display = "block";
+<!-- ════════════════════════════════════ TOAST ════════════════════════════════════ -->
+<div class="toast" id="toast">✅ 상담 신청이 이메일로 전송됩니다. 잠시만 기다려 주세요!</div>
+
+<!-- ════════════════════════════════════ SCRIPTS ════════════════════════════════════ -->
+<script>
+  /* ── QR Code ── */
+  window.addEventListener('DOMContentLoaded', function () {
+    new QRCode(document.getElementById('qrcode'), {
+      text: 'mailto:oneumfuture@gmail.com?subject=%EC%98%A8%EC%9D%B4%EC%9D%8C%EB%AF%B8%EB%9E%98%EC%97%B0%EA%B5%AC%EC%86%8C%20%EC%83%81%EB%8B%B4%EC%8B%A0%EC%B2%AD',
+      width: 160,
+      height: 160,
+      colorDark: '#2E3A45',
+      colorLight: '#FFFFFF',
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  });
+
+  /* ── Open consult with pre-selected topic ── */
+  function openConsult(topic) {
+    document.getElementById('consultTopic').value = topic;
+    document.getElementById('consult').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(function () { document.getElementById('userName').focus(); }, 600);
+  }
+
+  /* ── Send consultation via mailto ── */
+  function sendConsult(e) {
+    e.preventDefault();
+    var name    = document.getElementById('userName').value.trim();
+    var contact = document.getElementById('userContact').value.trim();
+    var topic   = document.getElementById('consultTopic').value;
+    var msg     = document.getElementById('userMessage').value.trim();
+
+    if (!name || !contact || !msg) { alert('필수 항목을 모두 입력해 주세요.'); return; }
+
+    var subject = encodeURIComponent('[온이음미래연구소 상담신청] ' + (topic || '일반 문의') + ' - ' + name);
+    var body = encodeURIComponent(
+      '[ 온이음미래연구소 상담 신청 ]\n\n' +
+      '■ 이름: ' + name + '\n' +
+      '■ 연락처: ' + contact + '\n' +
+      '■ 관심 주제: ' + (topic || '미선택') + '\n\n' +
+      '■ 상담 내용:\n' + msg + '\n\n' +
+      '---\n온이음미래연구소 홈페이지를 통해 신청하였습니다.'
+    );
+
+    var mailto = 'mailto:oneumfuture@gmail.com?subject=' + subject + '&body=' + body;
+    window.location.href = mailto;
+
+    showToast();
+    document.getElementById('consultForm').reset();
+  }
+
+  /* ── Reveal email ── */
+  function toggleEmail() {
+    var el = document.getElementById('email-revealed');
+    el.style.display = el.style.display === 'block' ? 'none' : 'block';
+  }
+
+  /* ── Toast ── */
+  function showToast() {
+    var t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(function () { t.classList.remove('show'); }, 4000);
+  }
+
+  /* ── Scroll-triggered card fade-in ── */
+  var cards = document.querySelectorAll('.service-card, .journey-item, .quote-item');
+  cards.forEach(function (c) { c.style.opacity = '0'; c.style.transform = 'translateY(20px)'; c.style.transition = 'opacity .5s ease, transform .5s ease'; });
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
       }
-    }
-  </script>
+    });
+  }, { threshold: 0.12 });
+  cards.forEach(function (c) { observer.observe(c); });
+</script>
 
 </body>
 </html>
